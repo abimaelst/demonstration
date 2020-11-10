@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'https://randomuser.me/api/?seed=rush&nat=br&results=10';
+const url = 'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo';
 const getUsers = async () => {
   try {
     const res = await axios.get(url)

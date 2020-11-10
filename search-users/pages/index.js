@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import Toggle from '../components/toggle'
+import InputSearch from '../components/inputSearch'
+import Card from '../components/card'
 import getUsers from './api/ServiceUsers'
 import styles from '../styles/Home.module.css'
+
 
 export default function Home() {
 
@@ -14,11 +16,23 @@ export default function Home() {
     setShowUsers(isChecked)
   }
   useEffect(() => {
-    const api = getUsers()
-
-
-
+    const setData = async () => {
+      const res = await getUsers()
+      const data = await res.results.map((user) => {
+        const { name, picture, dob, login, gender } = user;
+          return {
+            login: login.username,
+            name: name.first + ' ' + name.last,
+            dob: dob.age,
+            picture: picture.thumbnail,
+            gender,
+          }
+        })
+      setUsers(data)
+    }
+    setData()
   },[])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -30,12 +44,9 @@ export default function Home() {
         <h3>React Lifecycle</h3>
         <div className="divider"></div>
         <div className="section">
-          <Toggle description="Show users" enabled={showUsers} onToggle={handleShowUsers} />
+          <InputSearch description="Show users" placeholder="Buscar Usuários" />
         </div>
-        <div className="divider"></div>
-        <div className="section">
-          {showUsers && <Users users={users} />}
-        </div>
+        <Card users={users} />
       </main>
 
     </div>
