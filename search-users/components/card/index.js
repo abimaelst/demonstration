@@ -1,21 +1,19 @@
-
-export default function Users( { users }) {
-  console.log(users)
+export default function Users({ users }) {
   return (
-    <div>
-     {users.map(({login, name, dob, picture, gender}) => {
+    <div className="grid">
+      {users.map(({ login, name, dob, picture, gender }) => {
         return (
-          <ul key={login}>
-            <li>login: {login}</li>
-            <li>nome: {name}</li>
-            <li>idade: {dob}</li>
-            <li><img src={picture}/></li>
-            <li>sexo: {gender}</li>
+          <ul className="card" key={login}>
+            <li style={{ grindArea: "img" }}>
+              <img src={picture} />
+            </li>
+            <li style={{ grindArea: "name" }}>nome: {name}</li>
+            <li style={{ grindArea: "login" }}>login: {login}</li>
+            <li style={{ grindArea: "idade" }}>idade: {dob}</li>
+            <li style={{ grindArea: "sexo" }}>sexo: {gender}</li>
           </ul>
-        )
-      })
-     }
-
+        );
+      })}
     </div>
-  )
+  );
 }

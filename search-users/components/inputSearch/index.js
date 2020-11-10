@@ -1,17 +1,23 @@
+export default function InputSearch({ enabled, placeholder, searchUsers }) {
+  let textSearch = "";
 
-export default function InputSearch( { enabled, placeholder}) {
   const handleChange = (e) => {
-    console.log(e.key)
-    console.log(e.target.value)
-  }
+    textSearch = e.target.value;
+  };
+
+  const inputSubmit = () => {
+    console.log(textSearch);
+    searchUsers(textSearch);
+  };
 
   return (
     <div className="switch">
-      <label>
-        Buscar Usuários </label>
-        <input placeholder={placeholder} type="text" onKeyUp={handleChange} />
-        <span className="lever"></span>
+      <label>Buscar Usuários </label>
+      <input placeholder={placeholder} type="text" onKeyUp={handleChange} />
 
+      <button type="submit" name="action" onClick={inputSubmit}>
+        Submit
+      </button>
     </div>
-  )
+  );
 }
